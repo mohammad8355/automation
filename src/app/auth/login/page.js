@@ -1,6 +1,9 @@
-"use client"
-import { useForm } from "react-hook-form"
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation"; // Import useRouter
+import cover from "../../../Assets/Images/Bus_Cover_Auth.jpg";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -9,69 +12,75 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import Image from "next/image";
 
 export default function Page() {
   const form = useForm();
+  const router = useRouter(); // Initialize useRouter
+  
+  const onSubmit = (data) => {
+    console.log(data);
+    router.push('/panel/dashboard'); // Navigate to the dashboard
+  };
 
   return (
-   <div className="w-full h-full flex justify-center items-center p-2" >
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>به اتوماسیون ستاره جهان گستر خوش آمدید</CardTitle>
-        <CardDescription>لطفا در صورت مشکل با پشتیبانی تماس بگیرید</CardDescription>
-      </CardHeader>
-      <CardContent>
-      <Form {...form}>
-      <form  className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>نام کاربری</FormLabel>
-              <FormControl>
-                <Input placeholder="Joe" {...field} />
-              </FormControl>
-              <FormDescription>
-                نام کاربری شما 
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-            
-          )}
-        />
-         <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>ایمیل</FormLabel>
-              <FormControl>
-                <Input placeholder="email@gmail.com" {...field} />
-              </FormControl>
-              <FormDescription>
-              ایمیل 
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-            
-          )}
-        />
-        <Button className="w-full" type="submit">ورود</Button>
-        <a className="mt-2 text-blue-500" href="/auth/register" >ثبت نام</a>
-      </form>
-    </Form>
-      </CardContent>
+    <div className="relative w-full h-full flex justify-center items-center">
+      <Image src={cover} className="relative w-full h-full object-cover rounded-sm" />
+      <div className="bg-gradient-to-r from-black opacity-50 w-full h-full absolute z-10"></div>
+      <Card className="bg-transparent backdrop-blur-sm left-10 w-[350px] absolute z-30">
+        <CardHeader>
+          <CardTitle className="text-white font-medium">به اتوماسیون ستاره جهان گستر خوش آمدید</CardTitle>
+          <CardDescription className="text-white">لطفا در صورت مشکل با پشتیبانی تماس بگیرید</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">نام کاربری</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Joe" {...field} />
+                    </FormControl>
+                    <FormDescription className="text-white">
+                      نام کاربری شما
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-white">ایمیل</FormLabel>
+                    <FormControl>
+                      <Input placeholder="email@gmail.com" {...field} />
+                    </FormControl>
+                    <FormDescription className="text-white">
+                      ایمیل
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button className="w-full" type="submit">ورود</Button>
+            </form>
+          </Form>
+        </CardContent>
       </Card>
-   </div>
-  )
+    </div>
+  );
 }
