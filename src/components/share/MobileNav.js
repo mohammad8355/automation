@@ -1,57 +1,93 @@
 "use client";
-
-import { useState } from 'react';
-import { AiFillDashboard, AiFillCar } from 'react-icons/ai';
-import { FaUsers, FaMoneyBillAlt } from 'react-icons/fa';
-import { MdExpandMore, MdExpandLess } from 'react-icons/md';
+import React from "react";
+import { useState } from "react";
+import MenuItem from "./MenuItem";
+import SubMenuItem from "./SubMenuItem";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { TbReportSearch } from 'react-icons/tb';
 import { CiMenuBurger } from 'react-icons/ci';
+import { FaUsers, FaMoneyBillAlt } from 'react-icons/fa';
+import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { IoCloseSharp } from 'react-icons/io5';
-import MenuItem from './MenuItem';
-import SubMenuItem from './SubMenuItem';
-
-export default function Sidebar() {
+import { AiFillDashboard, AiFillCar } from 'react-icons/ai';
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+// const NavContent = () => {
+//   const Pathname = usePathname();
+//   return (
+//     <section className="flex h-full flex-col gap-6 pt-6 ">
+//       {sidebarLinks.map((item) => {
+//         const isActive =
+//           (Pathname.includes(item.route) && item.route.length > 1) ||
+//           Pathname === item.route;
+//         return (
+//           <SheetClose asChild>
+//             <Link
+//               href={item.route}
+//               className={`${
+//                 isActive
+//                   ? "primary-gradient rounded-lg text-light-900"
+//                   : "text-dark300_light900"
+//               } flex items-center justify-start gap-4 bg-transparent p-4`}
+//             >
+//               <Image
+//                 src={item.imgURL}
+//                 className={`${isActive ? "" : "invert-colors"}`}
+//                 alt={item.label}
+//                 width={20}
+//                 height={20}
+//               />
+//               <p className={`${isActive ? "base-bold" : "base-medium"}`}>
+//                 {item.label}
+//               </p>
+//             </Link>
+//           </SheetClose>
+//         );
+//       })}
+//     </section>
+//   );
+// };
+export default function MobileNav() {
   const [openMenus, setOpenMenus] = useState({});
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = (menu) => {
     setOpenMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
-    
-  };
-
-  const toggleSidebar = () => {
-    if (isOpen) {
-      // Close all menus when closing the sidebar
-      setOpenMenus({});
-    }
-    setIsOpen(!isOpen);
   };
 
   const closeMenus = () => {
     setOpenMenus({});
     setIsOpen(false);
   };
-
   return (
-    <>
-      <aside
-        className={`fixed h-screen bg-gray-800 max-sm:hidden text-white transition-transform duration-300  w-24 md:w-64 md:static md:translate-x-0`}
+    <Sheet >
+      <SheetTrigger className="hidden max-sm:block" asChild>
+      <CiMenuBurger size={40} />
+      </SheetTrigger>
+      <SheetContent
+        side="right"
+        className="hidden max-sm:block bg-gray-800 text-white h-screen   border-none"
       >
-        <div className="flex items-center justify-between p-4 md:hidden">
-          <button onClick={toggleSidebar} className="text-2xl">
-            {isOpen ? <IoCloseSharp /> : <CiMenuBurger />}
-          </button>
-        </div>
+        <Link className="flex items-center gap-1 " href="/">
+         <h3 className="text-left w-full" >اتوماسیون جهان گستر آریا</h3>
+        </Link>
         <nav className="flex flex-col space-y-2 p-4">
           <MenuItem onClick={() => { toggleMenu('dashboard'); }}>
             <AiFillDashboard className="mr-3" />
-            <span className={`${isOpen ? 'inline' : 'hidden'} md:inline`}>داشبورد</span>
+            <span className={`inline`}>داشبورد</span>
           </MenuItem>
           <div>
             <MenuItem onClick={() => { toggleMenu('management'); }}>
               <FaUsers className="mr-3" />
               <span className="flex items-center">
-                <span className={`${isOpen ? 'inline' : 'hidden'} md:inline`}>مدیریت سیستم</span>
+                <span className={`inline`}>مدیریت سیستم</span>
                 <span className="ml-auto">
                   {openMenus['management'] ? <MdExpandLess /> : <MdExpandMore />}
                 </span>
@@ -75,7 +111,7 @@ export default function Sidebar() {
             <MenuItem onClick={() => { toggleMenu('reports'); }}>
               <TbReportSearch className="mr-3" />
               <span className="flex items-center">
-                <span className={`${isOpen ? 'inline' : 'hidden'} md:inline`}>گزارشات</span>
+                <span className={`inline`}>گزارشات</span>
                 <span className="ml-auto">
                   {openMenus['reports'] ? <MdExpandLess /> : <MdExpandMore />}
                 </span>
@@ -96,7 +132,8 @@ export default function Sidebar() {
             )}
           </div>
         </nav>
-      </aside>
-    </>
+ 
+      </SheetContent>
+    </Sheet>
   );
 }
