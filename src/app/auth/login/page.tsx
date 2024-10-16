@@ -1,7 +1,7 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation"; // Import useRouter
+import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import cover from "../../../Assets/Images/Bus_Cover_Auth.jpg";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,18 +23,23 @@ import {
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 
+interface FormData {
+  username: string;
+  email: string;
+}
+
 export default function Page() {
-  const form = useForm();
-  const router = useRouter(); // Initialize useRouter
-  
-  const onSubmit = (data) => {
+  const form = useForm<FormData>();
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
     router.push('/panel/dashboard'); // Navigate to the dashboard
   };
 
   return (
     <div className="relative w-full h-full flex justify-center items-center">
-      <Image src={cover} className="relative w-full h-full object-cover rounded-sm" />
+      <Image src={cover} alt="Bus Cover" className="relative w-full h-full object-cover rounded-sm" />
       <div className="bg-gradient-to-r from-black opacity-50 w-full h-full absolute z-10"></div>
       <Card className="bg-transparent backdrop-blur-sm left-10 w-[350px] absolute z-30">
         <CardHeader>

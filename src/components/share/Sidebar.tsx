@@ -59,7 +59,7 @@ export default function Sidebar() {
             </MenuItem>
             {openMenus['management'] && (
               <div className="flex flex-col space-y-2 pl-6 pt-2">
-                <SubMenuItem href="#" onClick={closeMenus}>
+                <SubMenuItem href="dashboard/drivermanagement" onClick={closeMenus}>
                   مدیریت رانندگان
                 </SubMenuItem>
                 <SubMenuItem href="#" onClick={closeMenus}>
