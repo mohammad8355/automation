@@ -1,4 +1,4 @@
-import InfoCard from '@/components/share/InfoCard'
+import InfoCard from '../../../components/share/InfoCard'
 import { FaDollarSign, FaUsers, FaChartLine } from 'react-icons/fa';
 
 import React from 'react'

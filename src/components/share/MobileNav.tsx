@@ -8,14 +8,14 @@ import {
   SheetClose,
   SheetContent,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "../ui/sheet";
 import { TbReportSearch } from 'react-icons/tb';
 import { CiMenuBurger } from 'react-icons/ci';
 import { FaUsers, FaMoneyBillAlt } from 'react-icons/fa';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { IoCloseSharp } from 'react-icons/io5';
 import { AiFillDashboard, AiFillCar } from 'react-icons/ai';
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -71,7 +71,7 @@ export default function MobileNav() {
       <SheetTrigger className="hidden max-sm:block" asChild>
       <CiMenuBurger size={40} />
       </SheetTrigger>
-      <SheetContent
+      <SheetContent 
         side="right"
         className="hidden max-sm:block bg-gray-800 text-white h-screen   border-none"
       >

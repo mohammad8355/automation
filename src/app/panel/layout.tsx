@@ -1,8 +1,8 @@
 // app/panel/layout.js
 
-import MobileNav from '@/components/share/MobileNav';
+import MobileNav from '../../components/share/MobileNav';
 import Sidebar from '../../components/share/Sidebar';
-import Navbar from '@/components/share/Navbar';
+import Navbar from '../../components/share/Navbar';
 
 export default function PanelLayout({ children }) {
   return (

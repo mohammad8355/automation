@@ -9,6 +9,7 @@ import { CiMenuBurger } from 'react-icons/ci';
 import { IoCloseSharp } from 'react-icons/io5';
 import MenuItem from './MenuItem';
 import SubMenuItem from './SubMenuItem';
+import * as  route from "../../Routes.js";
 
 export default function Sidebar() {
   const [openMenus, setOpenMenus] = useState({});
@@ -44,8 +45,10 @@ export default function Sidebar() {
         </div>
         <nav className="flex flex-col space-y-2 p-4">
           <MenuItem onClick={() => { toggleMenu('dashboard'); }}>
-            <AiFillDashboard className="mr-3" />
-            <span className={`${isOpen ? 'inline' : 'hidden'} md:inline`}>داشبورد</span>
+          <a  href={route.DASHBOARD} className={` w-full h-full  flex justify-between`}>
+          <AiFillDashboard className="mr-3" />
+          <span className={`${isOpen ? 'inline' : 'hidden'} md:inline`}>داشبورد</span>
+          </a>
           </MenuItem>
           <div>
             <MenuItem onClick={() => { toggleMenu('management'); }}>
@@ -59,7 +62,7 @@ export default function Sidebar() {
             </MenuItem>
             {openMenus['management'] && (
               <div className="flex flex-col space-y-2 pl-6 pt-2">
-                <SubMenuItem href="dashboard/drivermanagement" onClick={closeMenus}>
+                <SubMenuItem href={route.DRIVER_MANAGEMENT} onClick={closeMenus}>
                   مدیریت رانندگان
                 </SubMenuItem>
                 <SubMenuItem href="#" onClick={closeMenus}>

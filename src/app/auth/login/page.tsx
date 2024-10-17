@@ -3,7 +3,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import cover from "../../../Assets/Images/Bus_Cover_Auth.jpg";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../components/ui/button";
 import {
   Form,
   FormControl,
@@ -12,15 +12,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "../../../components/ui/form";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+} from "../../../components/ui/card";
+import { Input } from "../../../components/ui/input";
 import Image from "next/image";
 
 interface FormData {

@@ -1,13 +1,25 @@
 "use client"
-import { Button } from "@/components/ui/button.jsx"
+import * as React from "react"
+import { Button } from "../ui/button"
+import { Input } from "../ui/input"
 import {
   ColumnDef,
+  ColumnFiltersState,
+  VisibilityState,
+  SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   useReactTable,
   getPaginationRowModel,
+  getSortedRowModel,
 } from "@tanstack/react-table"
-
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu"
 import {
   Table,
   TableBody,
@@ -26,23 +38,102 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  )
+  const [columnVisibility, setColumnVisibility] =
+  React.useState<VisibilityState>({})
+  const [pageSize, setPageSize] = React.useState<number>(10);
+  const [pageIndex, setPageIndex] = React.useState<number>(0);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    state: {
+      sorting,
+      columnFilters,
+      columnVisibility,
+      pagination:{
+        pageIndex,
+        pageSize,
+      },
+    },
   })
 
   return (
     <div>
+      <div className="flex items-center py-4">
+        <Input
+          placeholder="جستجو..."
+          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("email")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+         <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              نمایش ستون
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter(
+                (column) => column.getCanHide()
+              )
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+            <Button variant="outline" size="sm">
+              تعداد آیتم ها
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {[3, 10, 20, 40, 50].map(size => (
+              <DropdownMenuCheckboxItem
+                key={size}
+                checked={pageSize === size}
+                onCheckedChange={() => setPageSize(size)}
+              >
+                {size}
+              </DropdownMenuCheckboxItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     <div className="rounded-md border">
-      <Table>
-        <TableHeader>
+      <Table className="text-center" >
+        <TableHeader className="bg-blue-500 text-white hover:bg-blue-700 hover:opacity-100" >
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
+                  <TableHead className="text-center text-white" key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -83,19 +174,20 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.previousPage()}
+          onClick={() => {setPageIndex((c) => c - 1)}}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          قبلی
         </Button>
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.nextPage()}
+          onClick={() => {setPageIndex((c) => c + 1)}}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          بعدی
         </Button>
+      
       </div>
     </div>
   )
