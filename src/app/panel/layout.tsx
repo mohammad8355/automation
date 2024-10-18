@@ -11,7 +11,7 @@ export default function PanelLayout({ children }) {
       <MobileNav />
       <div className='w-full flex flex-col ' >
       <Navbar />
-      <main className="max-sm:w-full h-screen flex-1 p-6 max-sm:p-0 max-sm:mr-0 max-md:mr-32 mr-0">
+      <main className="max-sm:w-full h-screen flex-1 p-6 max-sm:p-0 mr-0">
         {children}
       </main>
       </div>

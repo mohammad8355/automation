@@ -36,9 +36,6 @@ export default async function page() {
   return (
     <div className="container mx-auto py-10">
       <h1 className='text-[2em] font-bold  text-slate-800'>مدیریت رانندگان</h1>
-      <div className='flex justify-around items-center' >
-      <Button className="bg-red-600 hover:bg-red-800" >حذف</Button>
-      </div>
     <DataTable columns={columns} data={data} />
   </div>
   )

@@ -36,7 +36,7 @@ export default function Sidebar() {
   return (
     <>
       <aside
-        className={`fixed h-screen bg-gray-800 max-sm:hidden text-white transition-transform duration-300  w-24 md:w-64 md:static md:translate-x-0`}
+        className={` h-screen bg-gray-800 max-sm:hidden text-white transition-transform duration-300  ${isOpen ? `w-64` :`w-24`} md:w-64 md:translate-x-0`}
       >
         <div className="flex items-center justify-between p-4 md:hidden">
           <button onClick={toggleSidebar} className="text-2xl">
@@ -51,11 +51,11 @@ export default function Sidebar() {
           </a>
           </MenuItem>
           <div>
-            <MenuItem onClick={() => { toggleMenu('management'); }}>
-              <FaUsers className="mr-3" />
+            <MenuItem  onClick={() => { toggleMenu('management'); }}>
+              <FaUsers className={`${isOpen ? "mr-3" :"mr-5"}`} />
               <span className="flex items-center">
                 <span className={`${isOpen ? 'inline' : 'hidden'} md:inline`}>مدیریت سیستم</span>
-                <span className="ml-auto">
+                <span className={`ml-auto ${isOpen ? 'inline' : 'hidden'} md:inline`}>
                   {openMenus['management'] ? <MdExpandLess /> : <MdExpandMore />}
                 </span>
               </span>

@@ -68,8 +68,8 @@ export default function MobileNav() {
   };
   return (
     <Sheet >
-      <SheetTrigger className="hidden max-sm:block" asChild>
-      <CiMenuBurger size={40} />
+      <SheetTrigger className="hidden max-sm:block absolute text-white right-4 top-2" asChild>
+      <CiMenuBurger size={30} />
       </SheetTrigger>
       <SheetContent 
         side="right"

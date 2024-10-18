@@ -32,7 +32,7 @@ export const columns: ColumnDef<Driver>[] = [
       />
     ),
     cell: ({ row }) => (
-      <Checkbox
+      <Checkbox className="border-white"
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Select row"
@@ -74,15 +74,15 @@ export const columns: ColumnDef<Driver>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>عملیات ها</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(driver.id.toString())}
             >
-              Copy payment ID
+             جزییات
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>ویرایش</DropdownMenuItem>
+            <DropdownMenuItem>حذف</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

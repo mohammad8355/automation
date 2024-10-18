@@ -69,19 +69,19 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div>
-      <div className="flex items-center py-4">
+    <div className="max-sm:m-2" >
+      <div className="flex flex-wrap justify-around items-center py-4">
         <Input
           placeholder="جستجو..."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("email")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className=" ring-none max-w-sm max-md:w-[100] shadow-lg m-2 focus:shadow-md"
         />
          <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
+            <Button variant="outline" >
               نمایش ستون
             </Button>
           </DropdownMenuTrigger>
@@ -107,6 +107,9 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        <div className="m-2" >
+        <Button className="bg-red-600 hover:bg-red-800" >حذف</Button>
+        </div>
         <DropdownMenu>
         <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm">
@@ -130,7 +133,7 @@ export function DataTable<TData, TValue>({
       <Table className="text-center" >
         <TableHeader className="bg-blue-500 text-white hover:bg-blue-700 hover:opacity-100" >
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+            <TableRow className="hover:bg-transparent" key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
                   <TableHead className="text-center text-white" key={header.id}>
