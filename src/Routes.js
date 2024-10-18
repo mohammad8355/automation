@@ -4,4 +4,7 @@ const HALFWAY_MANAGEMENT = "/panel/dashboard/HalfwayManagement";
 const REPORT_MANAGEMENT = "/panel/dashboard/ReportManagement";
 const FINANCE_MANAGEMENT = "/panel/dashboard/FinanceManagement";
 const DASHBOARD = "/panel/dashboard";
-export { DRIVER_MANAGEMENT,PASSENGER_MANAGEMENT,HALFWAY_MANAGEMENT,REPORT_MANAGEMENT,FINANCE_MANAGEMENT,DASHBOARD }
+const PROFILE = "/panel/dashboard/Profile";
+const TICKETBOOKING = "/panel/dashboard/TicketBooking/BookTicket";
+const TICKETHISTORY = "/panel/dahsboard/TicketHistory";
+export { DRIVER_MANAGEMENT,PASSENGER_MANAGEMENT,HALFWAY_MANAGEMENT,REPORT_MANAGEMENT,FINANCE_MANAGEMENT,DASHBOARD ,PROFILE,TICKETHISTORY,TICKETBOOKING}

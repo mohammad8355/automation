@@ -1,6 +1,6 @@
 import Image from 'next/legacy/image'
 import React, { useState } from 'react'
-
+import * as route from "../../Routes";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Searchbar from './Searchbar';
 export default function Navbar() {
@@ -16,10 +16,10 @@ export default function Navbar() {
             </DropdownMenuTrigger>
             <DropdownMenuContent  className="w-full" >
                 <DropdownMenuItem>
-                    <h3>حساب کاربری</h3>
+                    <a href={route.PROFILE} >حساب کاربری</a>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <h3>خروج</h3>
+                    <h3 >خروج</h3>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>

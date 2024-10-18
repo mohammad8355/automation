@@ -6,6 +6,8 @@ import { FaUsers, FaMoneyBillAlt } from 'react-icons/fa';
 import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { TbReportSearch } from 'react-icons/tb';
 import { CiMenuBurger } from 'react-icons/ci';
+import { FaTicket } from "react-icons/fa6";
+
 import { IoCloseSharp } from 'react-icons/io5';
 import MenuItem from './MenuItem';
 import SubMenuItem from './SubMenuItem';
@@ -50,6 +52,27 @@ export default function Sidebar() {
           <span className={`${isOpen ? 'inline' : 'hidden'} md:inline`}>داشبورد</span>
           </a>
           </MenuItem>
+          <div>
+            <MenuItem  onClick={() => { toggleMenu('management'); }}>
+              <FaTicket className={`${isOpen ? "mr-3" :"mr-5"}`} />
+              <span className="flex items-center">
+                <span className={`${isOpen ? 'inline' : 'hidden'} md:inline`}>رزرواسیون</span>
+                <span className={`ml-auto ${isOpen ? 'inline' : 'hidden'} md:inline`}>
+                  {openMenus['management'] ? <MdExpandLess /> : <MdExpandMore />}
+                </span>
+              </span>
+            </MenuItem>
+            {openMenus['management'] && (
+              <div className="flex flex-col space-y-2 pl-6 pt-2">
+                <SubMenuItem href={route.TICKETBOOKING} onClick={closeMenus}>
+                  رزرو بلیط
+                </SubMenuItem>
+                <SubMenuItem href={route.TICKETHISTORY} onClick={closeMenus}>
+                  گزارش رزروها
+                </SubMenuItem>
+              </div>
+            )}
+          </div>
           <div>
             <MenuItem  onClick={() => { toggleMenu('management'); }}>
               <FaUsers className={`${isOpen ? "mr-3" :"mr-5"}`} />
