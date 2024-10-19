@@ -83,17 +83,17 @@ const items = [
 ]
 export default function AppSidebar() {
     return (
-        <Sidebar side={"right"} >
-            <SidebarContent>
+        <Sidebar className="bg-slate-800 text-white" side={"right"} >
+            <SidebarContent className="bg-slate-800 " >
             <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>اتوماسیون رزرواسیون </SidebarGroupLabel>
           <SidebarGroupContent>
                 <SidebarMenu>
               
                         {items && items.map((item) => {
                             return       <Collapsible className="group/collapsible"><SidebarMenuItem>
-                                <CollapsibleTrigger asChild>
-                                    <SidebarMenuButton ><a className='flex px-2 py-1 gap-1' href={item.url ? item.url : "#"}><item.icon/>{item.title}</a></SidebarMenuButton>
+                                <CollapsibleTrigger className='hover:bg-slate-600' asChild>
+                                    <SidebarMenuButton ><a className='text-white flex px-2 py-1 gap-1' href={item.url ? item.url : "#"}><item.icon/>{item.title}</a></SidebarMenuButton>
                                 </CollapsibleTrigger>
                                 <CollapsibleContent>
                                     {item.children && item.children.map((s) => {
