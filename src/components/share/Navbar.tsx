@@ -3,10 +3,12 @@ import React, { useState } from 'react'
 import * as route from "../../Routes";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import Searchbar from './Searchbar';
+import { SidebarTrigger } from '../ui/sidebar';
+import { CiMenuBurger } from 'react-icons/ci';
 export default function Navbar() {
   return (
  <div className=' w-full h-[10] bg-slate-700 flex justify-around items-center' >
-   <Searchbar />
+    <SidebarTrigger className="bg-black" ><CiMenuBurger /></SidebarTrigger>
     <div className='cursor-pointer hover:bg-slate-600 rounded-md h-full flex justify-center items-center p-1 ' >
         <DropdownMenu>
             <DropdownMenuTrigger className='outline-none border-none' >
