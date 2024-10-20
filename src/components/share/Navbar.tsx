@@ -5,11 +5,18 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import Searchbar from './Searchbar';
 import { SidebarTrigger } from '../ui/sidebar';
 import { CiMenuBurger } from 'react-icons/ci';
+import { Button } from '../ui/button';
+import { CustomSidebarTrigger } from './CustomSidebarTrigger';
+import { Bell } from 'lucide-react';
 export default function Navbar() {
   return (
- <div className=' w-full h-[10] bg-slate-700 flex justify-around items-center' >
-    <SidebarTrigger className="bg-black" ><CiMenuBurger /></SidebarTrigger>
-    <div className='cursor-pointer hover:bg-slate-600 rounded-md h-full flex justify-center items-center p-1 ' >
+ <div className=' w-full h-[10] bg-teal-500 flex justify-between items-center py-2 px-1' >
+    <CustomSidebarTrigger />
+    <div className='flex gap-x-2' >
+    <div className='p-1' >
+    <Bell strokeWidth={2} className='cursor-pointer text-white' />
+    </div>
+    <div className='cursor-pointer rounded-md h-full flex justify-center items-center p-1 ' >
         <DropdownMenu>
             <DropdownMenuTrigger className='outline-none border-none' >
                 <div className='flex items-center' >
@@ -27,6 +34,8 @@ export default function Navbar() {
         </DropdownMenu>
 
     </div>
+    </div>
+
  </div>
   )
 }

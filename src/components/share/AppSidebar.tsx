@@ -8,6 +8,7 @@ import { CiMenuBurger } from 'react-icons/ci';
 import { FaCircle } from "react-icons/fa";
 import { FaTicket } from "react-icons/fa6";
 import * as routes from "../../Routes";
+import { useSidebar } from "../../components/ui/sidebar"
 import { Calendar, Home, icons, Inbox, Search, Settings } from "lucide-react"
 import {
     Sidebar,
@@ -21,6 +22,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "../ui/sidebar"
+
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '../ui/collapsible'
 // Menu items.
 const items = [
@@ -82,9 +84,18 @@ const items = [
     },
 ]
 export default function AppSidebar() {
+    const {
+        state,
+        open,
+        setOpen,
+        openMobile,
+        setOpenMobile,
+        isMobile,
+        toggleSidebar,
+      } = useSidebar()
     return (
-        <Sidebar className="bg-slate-800 text-white" side={"right"} >
-            <SidebarContent className="bg-slate-800 " >
+        <Sidebar collapsible="icon" side={"right"} >
+            <SidebarContent  >
             <SidebarGroup>
           <SidebarGroupLabel>اتوماسیون رزرواسیون </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -92,13 +103,13 @@ export default function AppSidebar() {
               
                         {items && items.map((item) => {
                             return       <Collapsible className="group/collapsible"><SidebarMenuItem>
-                                <CollapsibleTrigger className='hover:bg-slate-600' asChild>
-                                    <SidebarMenuButton ><a className='text-white flex px-2 py-1 gap-1' href={item.url ? item.url : "#"}><item.icon/>{item.title}</a></SidebarMenuButton>
+                                <CollapsibleTrigger asChild>
+                                    <SidebarMenuButton ><a className={`w-full ${open && "px-2 gap-x-2" } flex  py-1  hover:text-teal-500`} href={item.url ? item.url : "#"}><item.icon className='text-teal-500' size={open ? 20 : 30} /><h3 className={`${open ? "inline" : "hidden"}`} >{item.title}</h3></a></SidebarMenuButton>
                                 </CollapsibleTrigger>
                                 <CollapsibleContent>
                                     {item.children && item.children.map((s) => {
                                         return <SidebarMenuSub>
-                                            <SidebarMenuSubItem ><a className='flex px-2 py-1 gap-1' href={s.url ? s.url : "#"}><s.icon size={10} />{s.title}</a></SidebarMenuSubItem>
+                                            <SidebarMenuSubItem ><a className='flex px-2 py-1 gap-1 items-center hover:text-teal-500' href={s.url ? s.url : "#"}><s.icon className='text-teal-500' size={5} /><h3>{s.title}</h3></a></SidebarMenuSubItem>
                                         </SidebarMenuSub>
                                     })}
                                 </CollapsibleContent>
